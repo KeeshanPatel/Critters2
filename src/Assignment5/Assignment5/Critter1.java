@@ -5,9 +5,9 @@
  * Date : 3/20/2018
  */
 
-package Assignment5;
+package src.Assignment5.Assignment5;
 
-import Assignment5.Critter.TestCritter;
+import src.Assignment5.Assignment5.Critter.TestCritter;
 
 /**
  * This Critter class: "Critter1" is a unique extension of the TestCritter

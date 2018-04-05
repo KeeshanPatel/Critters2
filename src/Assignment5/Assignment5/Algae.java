@@ -1,6 +1,6 @@
-package Assignment5;
+package src.Assignment5.Assignment5;
 
-import Assignment5.Critter.TestCritter;
+import src.Assignment5.Assignment5.Critter.TestCritter;
 
 public class Algae extends TestCritter {
 
@@ -9,7 +9,7 @@ public class Algae extends TestCritter {
 	public boolean fight(String opponent) {
 		if (toString().equals(opponent)) { // same species as me!
 			/* try to move away */
-			walk(Critter.getRandomInt(8));
+			walk(getRandomInt(8));
 		}
 		return false; 
 	}

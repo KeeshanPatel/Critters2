@@ -1,4 +1,4 @@
-package Assignment5;
+package src.Assignment5.Assignment5;
 
 import java.util.Iterator;
 import java.util.List;
@@ -95,7 +95,7 @@ public abstract class Critter {
 
     private int x_coord;
     private int y_coord;
-
+        //critter 
     protected final void walk(int direction) {
         this.energy -= Params.walk_energy_cost;
         switch (direction) {

@@ -1,4 +1,4 @@
-package Assignment5;
+package src.Assignment5.Assignment5;
 
 //import project5.Critter.CritterShape;
 

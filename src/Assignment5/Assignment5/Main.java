@@ -1,4 +1,4 @@
-package Assignment5;
+package src.Assignment5.Assignment5;
 
 import java.io.File;
 import java.util.List;
@@ -543,6 +543,10 @@ public class Main extends Application
         runStatsWindow.show();
     }
 
+    /**
+     * gets all of the classes in teh assignment5
+     * @return
+     */
     public String[] getClasses()
     {
         String[] fileList = new String[1];

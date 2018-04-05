@@ -1,4 +1,4 @@
-package Assignment5;
+package src.Assignment5.Assignment5;
 
 public class Craig extends Critter {
 	
@@ -13,7 +13,7 @@ public class Craig extends Critter {
 		for (int k = 0; k < 8; k += 1) {
 			genes[k] = GENE_TOTAL / 8;
 		}
-		dir = Critter.getRandomInt(8);
+		dir = getRandomInt(8);
 	}
 	
 	public boolean fight(String not_used) { return true; }
@@ -28,18 +28,18 @@ public class Craig extends Critter {
 			for (int k = 0; k < 8; k += 1) {
 				child.genes[k] = this.genes[k];
 			}
-			int g = Critter.getRandomInt(8);
+			int g = getRandomInt(8);
 			while (child.genes[g] == 0) {
-				g = Critter.getRandomInt(8);
+				g = getRandomInt(8);
 			}
 			child.genes[g] -= 1;
-			g = Critter.getRandomInt(8);
+			g = getRandomInt(8);
 			child.genes[g] += 1;
-			reproduce(child, Critter.getRandomInt(8));
+			reproduce(child, getRandomInt(8));
 		}
 		
 		/* pick a new direction based on our genes */
-		int roll = Critter.getRandomInt(GENE_TOTAL);
+		int roll = getRandomInt(GENE_TOTAL);
 		int turn = 0;
 		while (genes[turn] <= roll) {
 			roll = roll - genes[turn];

@@ -15,4 +15,4 @@
    Describe here known bugs or issues in this file. If your issue spans multiple
    files, or you are not sure about details, add comments to the README.txt file.
  */
-package Assignment5;
+package src.Assignment5.Assignment5;
