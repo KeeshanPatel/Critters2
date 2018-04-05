@@ -5,11 +5,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Ellipse;
 
-import static Assignment5.Main.TILE_SIZE;
+//import static Assignment5.Main.TILE_SIZE;
 
 public class Piece extends StackPane
 {
-
+/*
     private CritterShape shape;
 
 
@@ -37,5 +37,5 @@ public class Piece extends StackPane
         s.setTranslateY((TILE_SIZE - TILE_SIZE * 0.26 * 2) / 2);
 
         getChildren().add(s);
-    }
+    }*/
 }

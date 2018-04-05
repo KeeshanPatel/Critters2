@@ -3,8 +3,15 @@ package Assignment5;
 import java.util.Iterator;
 import java.util.List;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.image.*;
 import javafx.stage.Stage;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.shape.Polygon;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -17,7 +24,17 @@ import javafx.scene.shape.ArcType;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
+import javafx.scene.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.*;
 import javafx.scene.layout.*;
 
 import javafx.scene.text.*;
@@ -356,16 +373,70 @@ public abstract class Critter {
     */
     public static Group displayWorld() {
 
-        Group critterGroup = new Group();
+        GridPane grid = new GridPane();
+        Scene world = new Scene(grid, 500, 500);
+        grid.setBackground(new Background( new BackgroundFill(Color.WHITE, null, null)));
 
-        for(Critter c : population)
+        for(int x = 0; x < Params.world_width; x++)
         {
-            Piece p = new Piece(c.viewShape(), c.x_coord, c.y_coord);
-
-            critterGroup.getChildren().add(p);
+            ColumnConstraints cc = new ColumnConstraints();
+            cc.setPercentWidth(Params.world_width);
+            grid.getColumnConstraints().add(cc);
         }
 
-        return critterGroup;
+        for(int y = 0 ; y < Params.world_height; y++)
+        {
+            RowConstraints rc = new RowConstraints();
+            rc.setPercentHeight(Params.world_height);
+            grid.getRowConstraints().add(rc);
+        }
+
+        if(population.isEmpty())
+        {
+            grid.add(new Rectangle(), 0, 0);
+        }
+        else
+        {
+            for(Critter c: population)
+            {
+                //check if dead first?
+                switch(c.viewShape())
+                {
+                    case CIRCLE:
+                        Ellipse e = new Ellipse();
+                        e.setFill(c.viewFillColor());
+                        e.setStroke(c.viewOutlineColor());
+                        e.setStrokeWidth(2);
+                        e.radiusXProperty().bind(world.widthProperty().divide(Params.world_width * 2));
+                        e.radiusYProperty().bind(world.heightProperty().divide(Params.world_height * 2));
+                        grid.add(e, c.x_coord, c.y_coord);
+                        break;
+                    case SQUARE:
+                        Rectangle r = new Rectangle();
+                        r.widthProperty().bind(world.widthProperty().divide(Params.world_width));
+                        r.heightProperty().bind(world.heightProperty().divide(Params.world_height));
+                        r.setFill(c.viewOutlineColor());
+                        r.setStroke(c.viewOutlineColor());
+                        r.setStrokeWidth(2);
+                        grid.add(r, c.x_coord, c.y_coord);
+                        break;
+                    case TRIANGLE:
+                        double h;
+                        double b;
+                        Polygon t = new Polygon();
+                        DoubleProperty height = new SimpleDoubleProperty(world.getWidth() / Params.world_width);
+                        DoubleProperty base = new SimpleDoubleProperty(world.getHeight() / Params.world_height);
+                        height.addListener(new ChangeListener<Number>() {
+                            @Override
+                            public void changed(ObservableValue<? extends Number> observable, Number oldHeight, Number newHeight) {
+                                h =  newHeight.doubleValue();
+                                t.getPoints().clear();
+                                t.getPoints().addAll(new Double[] {b / 2, 0.0, b, h, 0.0, h});
+                            }
+                        });
+                }
+            }
+        }
 
     }
 
