@@ -95,7 +95,7 @@ public abstract class Critter {
 
     private int x_coord;
     private int y_coord;
-        //critter 
+        //critter 2
     protected final void walk(int direction) {
         this.energy -= Params.walk_energy_cost;
         switch (direction) {
