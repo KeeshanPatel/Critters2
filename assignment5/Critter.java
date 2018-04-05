@@ -41,8 +41,129 @@ public abstract class Critter {
 	static {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
 	}
-	
-	protected final String look(int direction, boolean steps) {return "";}
+
+	/**
+	 * This method will allow a critter to look ahead to the place it will be going and see if there is a critter already there
+	 * @param direction is a integer value between 0 and 7 that will change the direction of movement
+	 * @param steps if false, then look 1 space ahead, if true look 2 spaces ahead
+	 * @return String null if there is no critter in that space, or the toString of the critter in that location
+	 */
+	protected final String look(int direction, boolean steps) {
+		this.energy-=Params.look_energy_cost;
+		int xLook = this.x_coord;
+		int yLook = this.y_coord;
+		if(steps == false) {
+			switch (direction) {
+				case 0:
+					xLook = (x_coord + 1) % Params.world_width;
+					break;
+				case 1:
+					xLook = (x_coord + 1) % Params.world_width;
+					yLook = (y_coord - 1) % Params.world_height;
+					if (yLook < 0) {
+						yLook += Params.world_height;
+					}
+					break;
+				case 2:
+					yLook = (y_coord - 1) % Params.world_height;
+					if (yLook < 0) {
+						yLook += Params.world_height;
+					}
+					break;
+				case 3:
+					yLook = (y_coord - 1) % Params.world_height;
+					if (yLook < 0) {
+						yLook += Params.world_height;
+					}
+					xLook = (x_coord - 1) % Params.world_width;
+					if (xLook < 0) {
+						xLook += Params.world_width;
+					}
+					break;
+				case 4:
+					xLook = (x_coord - 1) % Params.world_width;
+					if (xLook < 0) {
+						xLook += Params.world_width;
+					}
+					break;
+				case 5:
+					xLook = (x_coord - 1) % Params.world_width;
+					if (xLook < 0) {
+						xLook += Params.world_width;
+					}
+					yLook = (y_coord + 1) % Params.world_height;
+					break;
+				case 6:
+					yLook = (y_coord + 1) % Params.world_height;
+					yLook = (y_coord + 1) % Params.world_height;
+					break;
+				case 7:
+					xLook = (x_coord + 1) % Params.world_width;
+					xLook = (y_coord + 1) % Params.world_height;
+					break;
+			}
+		}
+			else {
+				switch (direction) {
+					case 0:
+						xLook = (x_coord + 2) % Params.world_width;
+						break;
+					case 1:
+						xLook = (x_coord + 2) % Params.world_width;
+						yLook = (y_coord - 2) % Params.world_height;
+						if (yLook < 0) {
+							yLook += Params.world_height;
+						}
+						break;
+					case 2:
+						yLook = (y_coord - 2) % Params.world_height;
+						if (yLook < 0) {
+							yLook += Params.world_height;
+						}
+						break;
+					case 3:
+						yLook = (y_coord - 2) % Params.world_height;
+						if (yLook < 0) {
+							yLook += Params.world_height;
+						}
+						xLook = (x_coord - 2) % Params.world_width;
+						if (xLook < 0) {
+							xLook += Params.world_width;
+						}
+						break;
+					case 4:
+						xLook = (x_coord - 2) % Params.world_width;
+						if (xLook < 0) {
+							xLook += Params.world_width;
+						}
+						break;
+					case 5:
+						xLook = (x_coord - 2) % Params.world_width;
+						if (xLook < 0) {
+							xLook += Params.world_width;
+						}
+						yLook = (y_coord + 2) % Params.world_height;
+						break;
+					case 6:
+						yLook = (y_coord + 2) % Params.world_height;
+						yLook = (y_coord + 2) % Params.world_height;
+						break;
+					case 7:
+						xLook = (x_coord + 2) % Params.world_width;
+						xLook = (y_coord + 2) % Params.world_height;
+						break;
+				}
+		}
+
+		for(Critter c:population){
+			if(c.x_coord == xLook && c.y_coord == yLook){
+				String critterName = c.toString();
+				return critterName;
+			}
+		}
+
+		return null;
+	}
 	
 	/* rest is unchanged from Project 4 */
 	
